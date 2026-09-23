@@ -45,7 +45,7 @@ class CiReporter implements Reporter {
       : test.title.includes('screenshot') || result.error?.message?.includes('toHaveScreenshot')
         ? `${test.title}: screenshot changed. See the visual-failure artifact for the image diff.`
         : `${test.title}: ${check.message ?? 'check failed'}`;
-    console.log(`::error file=${command(check.file)},line=${check.line},title=${command('Design system check')}::${command(detail)}`);
+    console.log(`\n::error file=${command(check.file)},line=${check.line},title=${command('Design system check')}::${command(detail)}`);
   }
 
   onEnd() {
