@@ -1,0 +1,125 @@
+playwright.config.ts
+  s_93955c8045423a::t_fcb861071ec77f 18
+README.md
+  s_93955c8045423a::t_4734510260d3a2 3,5,7,9,12-13,16,19-21,24-29,31,33,35
+packages/ui/src/components/button.tsx
+  s_93955c8045423a::t_ffb13daa3552b0 1-58
+DESIGN_SYSTEM.md
+  s_93955c8045423a::t_2a668c754f1945 1,3,5-9,11
+tsconfig.json
+  s_93955c8045423a::t_26ff6767f5c9fb 2
+apps/web/components/dashboard.tsx
+  s_93955c8045423a::t_7447d6c9dbe530 1-70
+  s_2b38f076b9fd3b::t_443ea00a3d6f0a 71-362
+package.json
+  s_93955c8045423a::t_36af9f8df6b927 3,6-9,16-30
+  s_93955c8045423a::t_b36fb69d56a978 10
+.github/workflows/design-system.yml
+  s_93955c8045423a::t_e0873717565ea6 18-21,37-40
+.gitignore
+  s_93955c8045423a::t_09955dadd74c3b 1-47
+apps/web/app/page.tsx
+  s_93955c8045423a::t_342512a71a8a1f 1-5
+e2e/jev.spec.ts
+  s_93955c8045423a::t_fcb861071ec77f 22-24,63,68
+e2e/visual.spec.ts
+  s_93955c8045423a::t_fcb861071ec77f 15,21,24
+  s_93955c8045423a::t_0e41d8f18626b9 29-30
+  s_93955c8045423a::t_16bee087346dcb 28
+.eslintrc.js
+  s_2b38f076b9fd3b::t_abd9a1976e2ccb 1-13
+.prettierignore
+  s_2b38f076b9fd3b::t_71d58025b4806b 1-7
+.prettierrc
+  s_2b38f076b9fd3b::t_240d384ba752d5 1-11
+AGENTS.md
+  s_2b38f076b9fd3b::t_42864911db9331 1-5
+apps/web/app/layout.tsx
+  s_2b38f076b9fd3b::t_6219db63cdc086 1-30
+apps/web/components.json
+  s_2b38f076b9fd3b::t_0b2cc87b4691ab 1-23
+apps/web/components/theme-provider.tsx
+  s_2b38f076b9fd3b::t_c1530f791c1df6 1-71
+apps/web/eslint.config.js
+  s_2b38f076b9fd3b::t_5b01022d649095 1-4
+apps/web/next.config.ts
+  s_2b38f076b9fd3b::t_fc73a5fd20fb03 1-7
+apps/web/package.json
+  s_2b38f076b9fd3b::t_6e92b6b8944f5b 1-33
+apps/web/postcss.config.mjs
+  s_2b38f076b9fd3b::t_c6d737115cc285 1
+apps/web/tsconfig.json
+  s_2b38f076b9fd3b::t_7ec907162d2392 1-24
+bun.lock
+  s_2b38f076b9fd3b::t_779826480fa616 1-1493
+packages/eslint-config/README.md
+  s_2b38f076b9fd3b::t_760ce55020e6cb 1-3
+packages/eslint-config/base.js
+  s_2b38f076b9fd3b::t_f388de0c232ba4 1-32
+packages/eslint-config/next.js
+  s_2b38f076b9fd3b::t_ea3ab201baf301 1-51
+packages/eslint-config/package.json
+  s_2b38f076b9fd3b::t_37e0d24309e59c 1-26
+packages/eslint-config/react-internal.js
+  s_2b38f076b9fd3b::t_6a289cb51176c7 1-41
+packages/typescript-config/README.md
+  s_2b38f076b9fd3b::t_b78e634abdc859 1-3
+packages/typescript-config/base.json
+  s_2b38f076b9fd3b::t_a521b96cdc2454 1-20
+packages/typescript-config/nextjs.json
+  s_2b38f076b9fd3b::t_3c23651679082c 1-13
+packages/typescript-config/package.json
+  s_2b38f076b9fd3b::t_da2285fb989508 1-9
+packages/typescript-config/react-library.json
+  s_2b38f076b9fd3b::t_0144b473058d9f 1-8
+packages/ui/components.json
+  s_2b38f076b9fd3b::t_c6765cfb709896 1-23
+packages/ui/eslint.config.js
+  s_2b38f076b9fd3b::t_66061a354b74cb 1-4
+packages/ui/package.json
+  s_2b38f076b9fd3b::t_bb5697f73911d4 1-42
+packages/ui/postcss.config.mjs
+  s_2b38f076b9fd3b::t_b914bb6b8a9850 1-6
+packages/ui/src/components/badge.tsx
+  s_2b38f076b9fd3b::t_e28c91fa0da710 1-51
+packages/ui/src/components/dialog.tsx
+  s_2b38f076b9fd3b::t_02b14af8e0267c 1-160
+packages/ui/src/components/input.tsx
+  s_2b38f076b9fd3b::t_800863ea6aae35 1-19
+packages/ui/src/components/tabs.tsx
+  s_2b38f076b9fd3b::t_253eb60f749149 1,3-5,7-11,13-19,22,25-44,46-52,55-69,71,73-78,80-81
+packages/ui/src/lib/utils.ts
+  s_2b38f076b9fd3b::t_ee6e15b688633f 1
+packages/ui/src/styles/globals.css
+  s_2b38f076b9fd3b::t_eb47622e03e20a 1-132
+packages/ui/tsconfig.json
+  s_2b38f076b9fd3b::t_faa4fca9341eb1 1-10
+packages/ui/tsconfig.lint.json
+  s_2b38f076b9fd3b::t_554e9f6a6695b3 1-8
+turbo.json
+  s_2b38f076b9fd3b::t_ee93b7becf5c84 1-24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "53b082df74c9171de1df949e8f82fa5f4321c9d6",
+  "prompts": {},
+  "sessions": {
+    "s_2b38f076b9fd3b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "599d830c-2be9-4ea8-ab00-ed42eb9a78c3",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "grim <75869731+ripgrim@users.noreply.github.com>"
+    },
+    "s_93955c8045423a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0a1d3-7f03-77b1-b293-4cd68b2a5b2a",
+        "model": "gpt-6-sol"
+      },
+      "human_author": "grim <75869731+ripgrim@users.noreply.github.com>"
+    }
+  }
+}
