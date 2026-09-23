@@ -1,0 +1,19 @@
+apps/web/components/dashboard.tsx
+  s_93955c8045423a::t_8a317c178b5a5b 257
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "9cd213f089ffd9298951fd667e509eb433b32c92",
+  "prompts": {},
+  "sessions": {
+    "s_93955c8045423a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0a1d3-7f03-77b1-b293-4cd68b2a5b2a",
+        "model": "gpt-6-sol"
+      },
+      "human_author": "grim <75869731+ripgrim@users.noreply.github.com>"
+    }
+  }
+}
