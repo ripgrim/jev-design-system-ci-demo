@@ -1,0 +1,39 @@
+.github/workflows/design-system.yml
+  s_2b38f076b9fd3b::t_01bebeb8d04966 1-56
+DESIGN_SYSTEM.md
+  s_2b38f076b9fd3b::t_9e1e4f49154b7e 1-11
+README.md
+  s_2b38f076b9fd3b::t_34e2e96467e4fd 1-36
+e2e/jev.spec.ts
+  s_2b38f076b9fd3b::t_421f6e0e389c4e 1-70
+e2e/visual.spec.ts
+  s_2b38f076b9fd3b::t_6cb32c99ef9bd3 1-34
+package-lock.json
+  s_2b38f076b9fd3b::t_ceadea4f938d5a 1-990
+playwright.config.ts
+  s_2b38f076b9fd3b::t_4ba83927b54f07 1-23
+src/App.tsx
+  s_2b38f076b9fd3b::t_5b04f5ef305764 1-89
+src/design-system.tsx
+  s_2b38f076b9fd3b::t_a82864ff6f68e8 1-61
+src/main.tsx
+  s_2b38f076b9fd3b::t_026d1fe9eec28d 1-11
+src/styles.css
+  s_2b38f076b9fd3b::t_b4fa6516793dbe 1-88
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "6591d5e7f697fc9a066a639742f3d9705b760804",
+  "prompts": {},
+  "sessions": {
+    "s_2b38f076b9fd3b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "599d830c-2be9-4ea8-ab00-ed42eb9a78c3",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "grim <75869731+ripgrim@users.noreply.github.com>"
+    }
+  }
+}
