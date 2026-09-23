@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { useState } from "react"
 import {
   IconArchive,
@@ -88,6 +89,14 @@ export function Dashboard() {
               <span className="max-sm:hidden">{label}</span>
             </button>
           ))}
+          <Link
+            href="/quote-demo"
+            className="flex h-9 items-center gap-3 rounded-lg px-3 text-left text-sm text-muted-foreground hover:bg-sidebar-accent/60 hover:text-sidebar-foreground max-sm:justify-center max-sm:px-0"
+            aria-label="Quote journey"
+          >
+            <IconFileText className="size-4 shrink-0" stroke={1.7} />
+            <span className="max-sm:hidden">Quote journey</span>
+          </Link>
         </nav>
         <div className="mt-auto flex items-center gap-2 px-3 text-xs text-muted-foreground max-sm:justify-center max-sm:px-0">
           <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-muted font-medium text-foreground">

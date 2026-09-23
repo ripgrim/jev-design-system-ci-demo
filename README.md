@@ -30,6 +30,14 @@ CI runs the same checks in the pinned Playwright Linux image. It stores `OPENROU
 
 Jev gets text, so it cannot inspect the screenshot. The screenshot test handles visual changes.
 
-The companion draft PR changes the access confirmation from `destructive` to `default`. Both jobs should fail on that PR while `main` stays green. Keep the PR open as a test case.
+The companion draft PR changes the access confirmation from `destructive` to `default`. The visual and Jev jobs should fail on that PR; the quote journey should pass. Keep the PR open as a test case.
+
+## Quote journey
+
+Open `/quote-demo`. The seeded accounts are `allie@comp-demo.example` and `jordan@northstar.example`; both use `demo-only`. This is demo auth and in-process quote data, not a production login or quote service.
+
+The `journey` CI job signs in as sales, sends a quote, signs in as the customer, and signs it. Playwright supplies the seeded credentials and form values. Jev chooses from the task buttons shown at five decision points; Playwright clicks its choices, records the browser on failure, and checks that the server saved the signature.
+
+Run `bun run test:journey` with `OPENROUTER_API_KEY` set. To rehearse a failure, also set `QUOTE_DEMO_BREAK_SIGNING=1`. The failed run writes `issue-preview.md` and keeps the video, screenshot, and trace in `test-results`. CI uploads them as the `journey-failure` artifact. It does not create a Linear ticket.
 
 The secret-bearing Jev job runs only for pushes to `main` and pull requests from this repository. A contributor who can push a branch here can change code that the job runs, so only trusted contributors should have write access. An open contribution workflow needs a separate trusted workflow for Jev.

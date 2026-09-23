@@ -1,4 +1,4 @@
-name: design system checks
+name: experience checks
 
 on:
   push:
@@ -47,6 +47,28 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: jev-failure
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
+
+  journey:
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    container: mcr.microsoft.com/playwright:v1.63.0-noble
+    steps:
+      - uses: actions/checkout@v5
+      - run: npm install -g bun@1.3.2
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+      - run: bun run test:journey
+        env:
+          CI_CHECK_KIND: journey
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      - if: failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: journey-failure
           path: |
             playwright-report/
             test-results/

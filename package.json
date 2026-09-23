@@ -9,7 +9,8 @@
     "format": "turbo format",
     "typecheck": "turbo typecheck",
     "test:ui": "playwright test e2e/visual.spec.ts",
-    "test:jev": "playwright test e2e/jev.spec.ts"
+    "test:jev": "playwright test e2e/jev.spec.ts",
+    "test:journey": "playwright test e2e/quote-journey.spec.ts"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",
