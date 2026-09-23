@@ -1,0 +1,19 @@
+e2e/ci-reporter.ts
+  s_93955c8045423a::t_bbef97a2184b00 48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5da15a202bbd8063c52327fed4888b83ee3cd63e",
+  "prompts": {},
+  "sessions": {
+    "s_93955c8045423a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0a1d3-7f03-77b1-b293-4cd68b2a5b2a",
+        "model": "gpt-6-sol"
+      },
+      "human_author": "grim <75869731+ripgrim@users.noreply.github.com>"
+    }
+  }
+}
