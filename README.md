@@ -25,11 +25,11 @@ CI runs the same checks in the pinned Playwright Linux image. It stores `OPENROU
 
 ## What the checks cover
 
-- Playwright compares the People screen and archive dialog to approved screenshots. It also checks dialog closing, action spacing, and button height.
-- Jev reads each dialog's title, description, and action label, then chooses the expected shadcn button variant. It does not see the current style. Code compares its answer with the variant rendered by the component.
+- Playwright compares the People screen, access dialog, and archive dialog to approved screenshots. It also checks dialog closing, action spacing, button height, and the access change.
+- Jev reads the Add user and Change Jordan's access dialogs, then chooses a button variant. The access button says "Confirm change," so Jev needs the dialog text to know it removes access. It does not see the current style. CI shows the text, answer, and rendered variant together.
 
-Jev gets text, so it cannot inspect the screenshot. The screenshot test handles visual changes. The ambiguous “Keep policy” action has a fixed assertion because Jev did not classify it reliably enough for a CI gate.
+Jev gets text, so it cannot inspect the screenshot. The screenshot test handles visual changes.
 
-The companion draft PR changes the archive confirmation from `destructive` to `default`. Both jobs should fail on that PR while `main` stays green. Keep the PR open as a test case.
+The companion draft PR changes the access confirmation from `destructive` to `default`. Both jobs should fail on that PR while `main` stays green. Keep the PR open as a test case.
 
 The secret-bearing Jev job runs only for pushes to `main` and pull requests from this repository. A contributor who can push a branch here can change code that the job runs, so only trusted contributors should have write access. An open contribution workflow needs a separate trusted workflow for Jev.

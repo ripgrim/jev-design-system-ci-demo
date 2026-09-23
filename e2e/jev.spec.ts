@@ -50,7 +50,7 @@ async function checkAction(token: string, dialog: Locator, action: Locator, test
   const state = `Dialog: ${title}\nDescription: ${description}\nAction button: ${label}`;
   const answer = await expectedVariant(token, state);
   await testInfo.attach('design-check', {
-    body: Buffer.from(JSON.stringify({ action: label, rendered: actualVariant, jev: answer.variant, score: answer.probability })),
+    body: Buffer.from(JSON.stringify({ dialogTitle: title, description, action: label, rendered: actualVariant, jev: answer.variant, score: answer.probability })),
     contentType: 'application/json',
   });
   expect(actualVariant, `${label} should use the ${answer.variant} variant`).toBe(answer.variant);
@@ -65,9 +65,8 @@ test('dialog actions use the design-system variants Jev expects', async ({ page 
   await checkAction(token, page.getByRole('dialog'), page.getByRole('button', { name: 'Send invite' }), testInfo);
   await page.getByRole('button', { name: 'Close', exact: true }).click();
 
-  await page.getByRole('button', { name: 'Policies', exact: true }).click();
-  await page.getByRole('button', { name: 'Archive', exact: true }).click();
+  await page.getByRole('button', { name: "Change Jordan's access" }).click();
   const dialog = page.getByRole('dialog');
-  await expect(page.getByRole('button', { name: 'Keep policy' })).toHaveAttribute('data-variant', 'outline');
-  await checkAction(token, dialog, page.getByTestId('archive-confirm'), testInfo);
+  await expect(dialog.getByRole('button', { name: 'Cancel' })).toHaveAttribute('data-variant', 'outline');
+  await checkAction(token, dialog, page.getByTestId('access-confirm'), testInfo);
 });

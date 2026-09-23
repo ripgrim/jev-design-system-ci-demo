@@ -59,6 +59,8 @@ const navigation = [
 export function Dashboard() {
   const [section, setSection] = useState<Section>("people")
   const [inviteOpen, setInviteOpen] = useState(false)
+  const [accessOpen, setAccessOpen] = useState(false)
+  const [accessDisabled, setAccessDisabled] = useState(false)
   const [archiveOpen, setArchiveOpen] = useState(false)
   const [archived, setArchived] = useState(false)
   const [email, setEmail] = useState("")
@@ -106,10 +108,17 @@ export function Dashboard() {
                 title="People"
                 description="Manage your team and invitations."
               >
-                <Button onClick={() => setInviteOpen(true)}>
-                  <IconPlus data-icon="inline-start" />
-                  Add user
-                </Button>
+                <div className="flex flex-wrap justify-end gap-2 max-sm:justify-start">
+                  {!accessDisabled && (
+                    <Button variant="outline" onClick={() => setAccessOpen(true)}>
+                      Change Jordan&apos;s access
+                    </Button>
+                  )}
+                  <Button onClick={() => setInviteOpen(true)}>
+                    <IconPlus data-icon="inline-start" />
+                    Add user
+                  </Button>
+                </div>
               </Heading>
               <Tabs defaultValue="all">
                 <TabsList variant="line" className="mb-5">
@@ -117,7 +126,13 @@ export function Dashboard() {
                   <TabsTrigger value="invited">Invited</TabsTrigger>
                 </TabsList>
                 <TabsContent value="all">
-                  <PeopleTable rows={people} />
+                  <PeopleTable
+                    rows={people.map((person) =>
+                      person.name === "Jordan Reyes" && accessDisabled
+                        ? { ...person, status: "Disabled" }
+                        : person
+                    )}
+                  />
                 </TabsContent>
                 <TabsContent value="invited">
                   <PeopleTable
@@ -240,6 +255,31 @@ export function Dashboard() {
           </form>
         </DialogContent>
       </Dialog>
+      <Dialog open={accessOpen} onOpenChange={setAccessOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Change Jordan&apos;s access</DialogTitle>
+            <DialogDescription>
+              Jordan will no longer be able to sign in or open company documents. Their work stays saved.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="-mx-0 mt-4 -mb-0 border-0 bg-transparent p-0">
+            <Button variant="outline" onClick={() => setAccessOpen(false)}>
+              Cancel
+            </Button>
+            <Button
+              data-testid="access-confirm"
+              variant="destructive"
+              onClick={() => {
+                setAccessDisabled(true)
+                setAccessOpen(false)
+              }}
+            >
+              Confirm change
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
       <Dialog open={archiveOpen} onOpenChange={setArchiveOpen}>
         <DialogContent>
           <DialogHeader>
@@ -287,7 +327,7 @@ function Heading({
   children?: React.ReactNode
 }) {
   return (
-    <div className="mb-8 flex items-start justify-between gap-4">
+    <div className="mb-8 flex items-start justify-between gap-4 max-sm:flex-col">
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
         <p className="mt-1 text-sm text-muted-foreground">{description}</p>

@@ -3,6 +3,8 @@ import { relative } from 'node:path';
 import type { Reporter, TestCase, TestResult } from '@playwright/test/reporter';
 
 type Decision = {
+  dialogTitle: string;
+  description: string;
   action: string;
   rendered: string | null;
   jev: string;
@@ -41,7 +43,7 @@ class CiReporter implements Reporter {
     if (result.status !== 'failed' && result.status !== 'timedOut') return;
     const mismatch = decisions.find((decision) => decision.rendered !== decision.jev);
     const detail = mismatch
-      ? `${mismatch.action}: rendered ${mismatch.rendered ?? 'none'}; Jev suggests ${mismatch.jev} (${Math.round(mismatch.score * 100)} percent model score).`
+      ? `${mismatch.dialogTitle}, ${mismatch.action}: rendered ${mismatch.rendered ?? 'none'}; Jev suggests ${mismatch.jev} (${Math.round(mismatch.score * 100)} percent model score).`
       : test.title.includes('screenshot') || result.error?.message?.includes('toHaveScreenshot')
         ? `${test.title}: screenshot changed. See the visual-failure artifact for the image diff.`
         : `${test.title}: ${check.message ?? 'check failed'}`;
@@ -59,9 +61,9 @@ class CiReporter implements Reporter {
     if (kind === 'jev') {
       const decisions = this.checks.flatMap((check) => check.decisions);
       if (decisions.length) {
-        lines.push('', '| Action | Rendered | Jev suggestion | Result |', '| --- | --- | --- | --- |');
+        lines.push('', '| What Jev read | Button | Rendered | Jev answer | Result |', '| --- | --- | --- | --- | --- |');
         for (const decision of decisions) {
-          lines.push(`| ${markdown(decision.action)} | ${markdown(decision.rendered ?? 'none')} | ${markdown(decision.jev)} (${Math.round(decision.score * 100)}% model score) | ${decision.rendered === decision.jev ? 'match' : 'mismatch'} |`);
+          lines.push(`| **${markdown(decision.dialogTitle)}:** ${markdown(decision.description)} | ${markdown(decision.action)} | ${markdown(decision.rendered ?? 'none')} | ${markdown(decision.jev)} (${Math.round(decision.score * 100)}% model score) | ${decision.rendered === decision.jev ? 'match' : 'mismatch'} |`);
         }
         lines.push('', 'The model score is not a probability that the UI is wrong.');
       }

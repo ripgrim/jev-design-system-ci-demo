@@ -14,6 +14,15 @@ test('archive dialog matches the design system', async ({ page }) => {
   await expect(page).toHaveScreenshot('archive-dialog.png');
 });
 
+test('access dialog matches the design system', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: "Change Jordan's access" }).click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await expect(page).toHaveScreenshot('access-dialog.png');
+  await page.getByTestId('access-confirm').click();
+  await expect(page.getByText('Disabled')).toBeVisible();
+});
+
 test('dialog close controls and action spacing work', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'Add user' }).click();
