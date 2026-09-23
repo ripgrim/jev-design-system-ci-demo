@@ -1,36 +1,35 @@
 # Comp design system CI demo
 
-A small React workspace used to test whether UI changes break a design system. It is separate from Comp v3.
+A small Next.js monorepo for testing design-system regressions in CI. It is separate from Comp v3.
 
-The app has People, Policies, and Components screens. The design system defines three button variants: primary for safe forward actions, secondary for cancel or unchanged actions, and danger for actions that remove or archive something.
+The UI comes from the shadcn preset `b2BVC6xQR`: Nova style, neutral surfaces, emerald accent, Geist, Tabler icons, and medium radius. The app uses the generated button, dialog, tabs, input, and badge components from `packages/ui`.
 
-## What CI checks
+## Run it
 
-- Playwright compares the People screen and archive dialog to approved screenshots. It also checks dialog closing, action spacing, and minimum button height.
-- Jev reads the invite and archive dialogs' titles, descriptions, and action labels. It chooses the expected button variant. The test compares those answers with the variants rendered by the app. Jev does not see each button's current style. The ambiguous cancel action uses a fixed assertion instead.
-
-The screenshot is the exact visual check. Jev adds a semantic check when the text of an action changes. Jev accepts text, not images, so it cannot judge pixel-level design fidelity.
-
-## Run locally
-
-Requires Node 22, Docker, and an OpenRouter API key with access to `typesafe/jev-1.13`.
+Requires Bun 1.3.2.
 
 ```sh
-npm ci
-npm run build
-npm run dev
+bun install --frozen-lockfile
+bun run dev
 ```
 
-To run the checks in the same Linux browser image as CI:
+The Next app is in `apps/web`. To run the checks locally, build it first:
 
 ```sh
-docker run --rm -v "$(pwd):/work" -v comp-jev-demo-node-modules:/work/node_modules -w /work mcr.microsoft.com/playwright:v1.63.0-noble bash -lc "npm ci && npm run build && npm run test:ui"
+bun run build
+bun run test:ui
+OPENROUTER_API_KEY=your-key bun run test:jev
 ```
 
-Set `OPENROUTER_API_KEY` in your local shell, then run `npm run test:jev` in that container. To use CI, add it as a repository Actions secret with the same name. Never put it in the repository.
+CI runs the same checks in the pinned Playwright Linux image. It stores `OPENROUTER_API_KEY` as a GitHub Actions secret. The key is never committed.
 
-The Jev job runs on pushes to `main` and pull requests from this repository. Fork pull requests do not receive the secret. A contributor who can push a branch to this repository can change code that the secret-bearing job runs, so only trusted contributors should have write access. For an open contribution workflow, keep Jev in a separate trusted workflow.
+## What the checks cover
 
-## Show the regression
+- Playwright compares the People screen and archive dialog to approved screenshots. It also checks dialog closing, action spacing, and button height.
+- Jev reads each dialog's title, description, and action label, then chooses the expected shadcn button variant. It does not see the current style. Code compares its answer with the variant rendered by the component.
 
-The companion pull request changes the archive confirmation button from danger to primary. On that PR, the screenshot and the Jev check should fail. The main branch is the passing baseline. The PR is intentionally left open as a test case.
+Jev gets text, so it cannot inspect the screenshot. The screenshot test handles visual changes. The ambiguous “Keep policy” action has a fixed assertion because Jev did not classify it reliably enough for a CI gate.
+
+The companion draft PR changes the archive confirmation from `destructive` to `default`. Both jobs should fail on that PR while `main` stays green. Keep the PR open as a test case.
+
+The secret-bearing Jev job runs only for pushes to `main` and pull requests from this repository. A contributor who can push a branch here can change code that the job runs, so only trusted contributors should have write access. An open contribution workflow needs a separate trusted workflow for Jev.

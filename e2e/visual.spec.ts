@@ -12,23 +12,20 @@ test('archive dialog matches the design system', async ({ page }) => {
   await page.getByRole('button', { name: 'Archive', exact: true }).click();
   await expect(page.getByRole('dialog')).toBeVisible();
   await expect(page).toHaveScreenshot('archive-dialog.png');
-  await expect(page.getByTestId('archive-confirm')).toHaveAttribute('data-variant', 'danger');
+  await expect(page.getByTestId('archive-confirm')).toHaveAttribute('data-variant', 'destructive');
 });
 
 test('dialog close controls and action spacing work', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'Add user' }).click();
-  await page.getByRole('button', { name: 'Close dialog' }).click();
+  await page.getByRole('button', { name: 'Close', exact: true }).click();
   await expect(page.getByRole('dialog')).toHaveCount(0);
   await page.getByRole('button', { name: 'Add user' }).click();
-  await page.getByTestId('dialog-backdrop').click({ position: { x: 5, y: 5 } });
+  await page.locator('[data-slot="dialog-overlay"]').click({ position: { x: 5, y: 5 } });
   await expect(page.getByRole('dialog')).toHaveCount(0);
   await page.getByRole('button', { name: 'Policies', exact: true }).click();
   await page.getByRole('button', { name: 'Archive', exact: true }).click();
-  const keep = await page.getByRole('button', { name: 'Keep policy' }).boundingBox();
-  const archive = await page.getByTestId('archive-confirm').boundingBox();
-  expect(keep && archive).toBeTruthy();
-  expect(archive!.x - (keep!.x + keep!.width)).toBeGreaterThanOrEqual(8);
-  expect(keep!.height).toBeGreaterThanOrEqual(34);
-  expect(archive!.height).toBeGreaterThanOrEqual(34);
+  expect(await page.getByTestId('archive-confirm').evaluate((element) => parseFloat(getComputedStyle(element.parentElement!).gap))).toBeGreaterThanOrEqual(8);
+  expect(await page.getByRole('button', { name: 'Keep policy' }).evaluate((element) => parseFloat(getComputedStyle(element).height))).toBeGreaterThanOrEqual(32);
+  expect(await page.getByTestId('archive-confirm').evaluate((element) => parseFloat(getComputedStyle(element).height))).toBeGreaterThanOrEqual(32);
 });

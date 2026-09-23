@@ -19,9 +19,9 @@ async function expectedVariant(token: string, state: string) {
           type: 'choice',
           instructions: 'Which design-system button variant fits this action? Judge what happens when the button is clicked, not its current color or styling.',
           criteria: {
-            primary: 'Confirms a safe, constructive action such as creating, saving, or inviting.',
-            secondary: 'Cancels, goes back, or leaves the current state unchanged.',
-            danger: 'Removes, archives, deletes, or revokes something.',
+            default: 'Confirms a safe, constructive action such as creating, saving, or inviting.',
+            outline: 'Cancels, goes back, or leaves the current state unchanged.',
+            destructive: 'Removes, archives, deletes, or revokes something.',
           },
         },
       },
@@ -60,11 +60,11 @@ test('dialog actions use the design-system variants Jev expects', async ({ page 
   await page.goto('/');
   await page.getByRole('button', { name: 'Add user' }).click();
   await checkAction(token, page.getByRole('dialog'), page.getByRole('button', { name: 'Send invite' }));
-  await page.getByRole('button', { name: 'Close dialog' }).click();
+  await page.getByRole('button', { name: 'Close', exact: true }).click();
 
   await page.getByRole('button', { name: 'Policies', exact: true }).click();
   await page.getByRole('button', { name: 'Archive', exact: true }).click();
   const dialog = page.getByRole('dialog');
-  await expect(page.getByRole('button', { name: 'Keep policy' })).toHaveAttribute('data-variant', 'secondary');
+  await expect(page.getByRole('button', { name: 'Keep policy' })).toHaveAttribute('data-variant', 'outline');
   await checkAction(token, dialog, page.getByTestId('archive-confirm'));
 });

@@ -1,11 +1,11 @@
-# Button rules
+# Demo design system
 
-| Variant | Use |
+Source: shadcn preset `b2BVC6xQR`. The generated tokens live in `packages/ui/src/styles/globals.css`; the button variants live in `packages/ui/src/components/button.tsx`.
+
+| Button variant | Use |
 | --- | --- |
-| Primary | Safe action that moves work forward, such as create or save |
-| Secondary | Cancel, go back, or leave the current state unchanged |
-| Danger | Remove, archive, delete, or revoke something |
+| `default` | Safe forward action, such as sending an invite |
+| `outline` | Cancel or leave the current state unchanged |
+| `destructive` | Remove, archive, delete, or revoke something |
 
-Buttons have a minimum 34 px height. Dialog actions have at least 8 px between them. Dialogs close through the X control, the backdrop, or Escape.
-
-The archive dialog is the test case. Its confirmation action must use the danger variant even if its copy changes.
+The archive confirmation is the regression example. Its action must use `destructive` even if the button label changes. The generated button exposes its variant through `data-variant` so the CI test can compare it with Jev's answer.
