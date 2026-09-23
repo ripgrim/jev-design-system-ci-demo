@@ -1,4 +1,4 @@
-import { expect, test, type Locator } from '@playwright/test';
+import { expect, test, type Locator, type TestInfo } from '@playwright/test';
 
 type JevAnswer = {
   type: string;
@@ -42,29 +42,32 @@ async function expectedVariant(token: string, state: string) {
   return { variant: answer.choice, probability };
 }
 
-async function checkAction(token: string, dialog: Locator, action: Locator) {
+async function checkAction(token: string, dialog: Locator, action: Locator, testInfo: TestInfo) {
   const title = await dialog.locator('h2').innerText();
   const description = await dialog.locator('p').innerText();
   const label = await action.innerText();
   const actualVariant = await action.getAttribute('data-variant');
   const state = `Dialog: ${title}\nDescription: ${description}\nAction button: ${label}`;
   const answer = await expectedVariant(token, state);
-  console.log(`${label}: Jev ${answer.variant} (${Math.round(answer.probability * 100)}%); rendered ${actualVariant}`);
+  await testInfo.attach('design-check', {
+    body: Buffer.from(JSON.stringify({ action: label, rendered: actualVariant, jev: answer.variant, score: answer.probability })),
+    contentType: 'application/json',
+  });
   expect(actualVariant, `${label} should use the ${answer.variant} variant`).toBe(answer.variant);
 }
 
-test('dialog actions use the design-system variants Jev expects', async ({ page }) => {
+test('dialog actions use the design-system variants Jev expects', async ({ page }, testInfo) => {
   const token = process.env.OPENROUTER_API_KEY;
   if (!token) throw new Error('OPENROUTER_API_KEY is required for the Jev check.');
 
   await page.goto('/');
   await page.getByRole('button', { name: 'Add user' }).click();
-  await checkAction(token, page.getByRole('dialog'), page.getByRole('button', { name: 'Send invite' }));
+  await checkAction(token, page.getByRole('dialog'), page.getByRole('button', { name: 'Send invite' }), testInfo);
   await page.getByRole('button', { name: 'Close', exact: true }).click();
 
   await page.getByRole('button', { name: 'Policies', exact: true }).click();
   await page.getByRole('button', { name: 'Archive', exact: true }).click();
   const dialog = page.getByRole('dialog');
   await expect(page.getByRole('button', { name: 'Keep policy' })).toHaveAttribute('data-variant', 'outline');
-  await checkAction(token, dialog, page.getByTestId('archive-confirm'));
+  await checkAction(token, dialog, page.getByTestId('archive-confirm'), testInfo);
 });

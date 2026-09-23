@@ -11,16 +11,18 @@ permissions:
 
 jobs:
   visual:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container: mcr.microsoft.com/playwright:v1.63.0-noble
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - run: npm install -g bun@1.3.2
       - run: bun install --frozen-lockfile
       - run: bun run build
       - run: bun run test:ui
+        env:
+          CI_CHECK_KIND: visual
       - if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: visual-failure
           path: |
@@ -30,18 +32,19 @@ jobs:
 
   jev:
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     container: mcr.microsoft.com/playwright:v1.63.0-noble
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - run: npm install -g bun@1.3.2
       - run: bun install --frozen-lockfile
       - run: bun run build
       - run: bun run test:jev
         env:
+          CI_CHECK_KIND: jev
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
       - if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: jev-failure
           path: |
