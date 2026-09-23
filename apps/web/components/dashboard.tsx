@@ -278,7 +278,7 @@ export function Dashboard() {
             </Button>
             <Button
               data-testid="access-confirm"
-              variant="destructive"
+              variant="default"
               onClick={() => {
                 setAccessDisabled(true)
                 setAccessOpen(false)
