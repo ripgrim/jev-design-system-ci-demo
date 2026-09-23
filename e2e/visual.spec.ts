@@ -11,8 +11,8 @@ test('archive dialog matches the design system', async ({ page }) => {
   await page.getByRole('button', { name: 'Policies', exact: true }).click();
   await page.getByRole('button', { name: 'Archive', exact: true }).click();
   await expect(page.getByRole('dialog')).toBeVisible();
-  await expect(page.getByTestId('archive-confirm')).toHaveAttribute('data-variant', 'danger');
   await expect(page).toHaveScreenshot('archive-dialog.png');
+  await expect(page.getByTestId('archive-confirm')).toHaveAttribute('data-variant', 'danger');
 });
 
 test('dialog close controls and action spacing work', async ({ page }) => {
