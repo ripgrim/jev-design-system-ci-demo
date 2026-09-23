@@ -108,7 +108,7 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       )
     }
-    if (process.env.QUOTE_DEMO_BREAK_SIGNING === "1") {
+    if (process.env.QUOTE_DEMO_BREAK_SIGNING !== "1") {
       return NextResponse.json(
         { error: "Signing is unavailable right now." },
         { status: 503 }
