@@ -1,0 +1,19 @@
+src/App.tsx
+  s_93955c8045423a::t_53e2fa9d8ee9f9 82
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d0dd1630f6786f6bf68004c4b85fb63208e80ee8",
+  "prompts": {},
+  "sessions": {
+    "s_93955c8045423a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0a1d3-7f03-77b1-b293-4cd68b2a5b2a",
+        "model": "gpt-6-sol"
+      },
+      "human_author": "grim <75869731+ripgrim@users.noreply.github.com>"
+    }
+  }
+}
